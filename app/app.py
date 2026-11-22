@@ -51,9 +51,8 @@ st.markdown(
 .h1{font-family:var(--sans);font-weight:800;letter-spacing:-.03em;line-height:1.1;font-size:clamp(1.6rem,6vw,2.4rem);color:var(--ink);margin:.5rem 0 .6rem 0}
 .h1 .acc{display:block;color:var(--accent);font-size:.72em;font-weight:700;letter-spacing:-.02em;margin-top:.15rem}
 .lede{font-family:var(--serif);font-style:italic;color:var(--muted);font-size:clamp(.95rem,3vw,1.05rem);line-height:1.5;margin:0 0 .4rem 0}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin:1.1rem 0 1.4rem 0}
-.stat{padding:.8rem .9rem;border-right:1px solid var(--line)}
-.stat:last-child{border-right:none}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin:1.1rem 0 1.4rem 0}
+.stat{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:6px;padding:.85rem .95rem;box-shadow:0 1px 3px rgba(20,18,15,0.10)}
 .sv{font-family:var(--mono);font-size:clamp(1.3rem,4.5vw,1.9rem);color:var(--ink);line-height:1.1}
 .sl{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink);margin-top:.35rem}
 .ss{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:.2rem}
@@ -233,7 +232,7 @@ def show_results(result):
 
 # ---------- Disclaimer and privacy ----------
 st.markdown(
-    '<div class="disc"><b>Educational demo, not medical advice.</b> It guesses which '
+    '<div class="disc"><b>Educational demo, not medical advice.</b> It predicts which '
     "condition a patient review is about. It does not diagnose, judge side effects or "
     "recommend treatment. <b>This app does not store or log what you type.</b> "
     "Please do not enter personal details.</div>",
@@ -312,12 +311,13 @@ validation only.
 
 **Limits**
 - Several labels overlap (the anxiety family, and Abnormal Uterine Bleeding vs Birth Control).
-  Part of the label seems to be a choice among the conditions a drug is listed for, which
+  Part of the label may be a choice among the conditions a drug is listed for, which
   text alone cannot recover.
 - The drug carries much of the signal, so a good score does not mean the model understands language.
 - For very short reviews (1 to 4 words) text-only accuracy was 0.28 versus 0.81 with the drug.
   This app asks for at least {MIN_WORDS} words, as the model was trained on reviews of that length.
-- One validation split and one test run. The data are patient-written reviews from 2018.
+- One validation split and one test run. The dataset was published in 2018, and its
+  patient-written reviews are older than that.
 """
     )
 
@@ -327,6 +327,10 @@ st.markdown(
     "UCI Machine Learning Repository, "
     '<a href="https://doi.org/10.24432/C5SK5S" target="_blank" rel="noopener noreferrer">'
     "https://doi.org/10.24432/C5SK5S</a>. Non-commercial research use.<br>"
-    "Model and project by Praise Emma. Web app by Arshi Nisar.</div>",
+    "Model and project by Praise Emma. Web app by "
+    '<a href="https://www.linkedin.com/in/arshi-n/" target="_blank" rel="noopener noreferrer">Arshi Nisar</a>. '
+    'GitHub: <a href="https://github.com/praiseemma/drug-review-condition-classifier" '
+    'target="_blank" rel="noopener noreferrer">'
+    "https://github.com/praiseemma/drug-review-condition-classifier</a>.</div>",
     unsafe_allow_html=True,
 )
